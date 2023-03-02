@@ -1,0 +1,23 @@
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Load the Iris dataset
+iris = load_iris()
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=42)
+
+# Train a logistic regression model on the training set
+clf = LogisticRegression(random_state=42)
+clf.fit(X_train, y_train)
+
+# Evaluate the model on the testing set
+score = clf.score(X_test, y_test)
+print(f"Accuracy: {score}")
+
+# Check which classes are linearly separable
+coef = clf.coef_
+intercept = clf.intercept_
+print(f"Coefficients: {coef}")
+print(f"Intercept: {intercept}")
