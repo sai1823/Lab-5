@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+i#mport the necessary libraries
+import pandas as pd
+import seaborn as sns
+
+iris = sns.load_dataset('iris')
+
+sns.pairplot(iris, hue='species')
