@@ -1,1 +1,49 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Load the Adult dataset
+adult = pd.read_csv('adult.csv')
+
+# Check the dataset shape
+print(adult.shape)
+
+# Check the dataset head
+print(adult.head())
+
+# Check the dataset info
+print(adult.info())
+
+# Check the dataset summary statistics
+print(adult.describe())
+
+# Check the dataset missing values
+print(adult.isnull().sum())
+
+# Check the dataset unique values
+print(adult.nunique())
+
+# Visualize the distribution of the target variable
+sns.countplot(x='income', data=adult)
+plt.show()
+
+# Visualize the distribution of the categorical variables
+cat_vars = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country']
+for var in cat_vars:
+    plt.figure(figsize=(10,6))
+    sns.countplot(x=var, hue='income', data=adult)
+    plt.xticks(rotation=45)
+    plt.show()
+
+# Visualize the correlation between numerical variables
+num_vars = ['age', 'fnlwgt', 'education-num', 'capital-gain', 'capital-loss', 'hours-per-week']
+plt.figure(figsize=(10,6))
+sns.heatmap(adult[num_vars].corr(), annot=True, cmap='coolwarm')
+plt.show()
+
+# Visualize the distribution of numerical variables
+for var in num_vars:
+    plt.figure(figsize=(10,6))
+    sns.histplot(data=adult, x=var, hue='income', kde=True)
+    plt.show()
