@@ -1,7 +1,12 @@
 #import the necessary libraries
 import pandas as pd
 import seaborn as sns
+from sklearn.datasets import load_iris
 
-iris = sns.load_dataset('iris')
+# Load the Iris dataset
+iris = load_iris()
+iris_df = pd.DataFrame(data=iris['data'], columns=iris['feature_names'])
+iris_df['target'] = iris['target']
 
-sns.pairplot(iris, hue='species')
+# Generate the scatter plot matrix
+sns.pairplot(iris_df, hue='target')
